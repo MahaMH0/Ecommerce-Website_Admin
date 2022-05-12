@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+    <title>Login Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form--user__icon">
+            <div class="icon--img">
+                <span class="glyphicon glyphicon-user"></span>
+            </div>
+        </div>
+        <h4 class="text-center">Login Form</h4>
+        <form [formGroup]="LoginForm" (ngSubmit)="Login()">
+            <div class="form-group">
+                <label for="userName"> <span class="glyphicon glyphicon-user"></span> User Name:</label>
+                <input formControlName="UserName" type="text" class="form-control" id="userName" placeholder="Enter Your User Name"
+                    name="userName">
+
+                <div [hidden]="UserName.valid || UserName.untouched">
+                    <small *ngIf="UserName.errors?.['required']" id="helpId" class="form-text text-muted d-block">UserName is
+                        Required</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="pwd"> <span class="glyphicon glyphicon-lock"></span> Password:</label>
+                <input type="Password" formControlName="Password" class="form-control" id="pwd"
+                    placeholder="Enter password" name="pwd">
+                <div [hidden]="Password.valid || Password.untouched">
+                    <small *ngIf="Password.errors?.['required']" id="helpId1"
+                        class="form-text text-muted d-block">Password is
+                        Required</small>
+                </div>
+            </div>
+            <a routerLink="/Loging/Register">Create Account</a><br><br>
+            <button [disabled]="LoginForm.invalid" type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

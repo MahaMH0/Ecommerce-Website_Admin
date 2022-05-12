@@ -1,0 +1,32 @@
+
+  <!-- <table [hidden]="IsPurshased" class="table"> -->
+    <h1>Food Orders</h1>
+    <img src="https://mpng.subpng.com/20180422/diw/kisspng-computer-icons-shopping-cart-encapsulated-postscri-5add18ef692f50.1824256415244392794309.jpg">
+    <br>
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Total Price</th>
+        <th>Order Products</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of Orders">
+        <td>{{item.id}}</td>
+        <td>{{item.createdDate}}</td>
+        <td>{{item.totalPrice}}</td>
+        <td *ngFor="let cartitem of item.shopingCartItems">
+         <p>ProductID: {{cartitem.productID}} </p> 
+         <p>Product Name: {{cartitem.productName}} </p>
+         <p>Product Price: {{cartitem.itemPrice}} </p>
+         <p>Quantity: {{cartitem.selectedQuantity}} </p> 
+         <hr> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="col-sm-6">
+    <a routerLink="/Home" routerLinkActive="active" class="nav-link">Back to Home</a>
+  </div>

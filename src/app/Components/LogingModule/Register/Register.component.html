@@ -1,0 +1,160 @@
+<html lang="en">
+
+<head>
+    <title>Registration Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <br><br>
+    <div class="container">
+        <div class="form--user__icon">
+            <div class="icon--img">
+                <span class="glyphicon glyphicon-user"></span>
+            </div>
+        </div>
+        <h4 class="text-center">Registeration Form</h4>
+        <form [formGroup]="RegistrationForm" (ngSubmit)="Register()">
+            <div class="form-group">
+                <label for="name"> <span class="glyphicon glyphicon-user"></span>Full Name</label>
+                <input formControlName="fullName" type="text" class="form-control" id="name"
+                   required minlength="10" placeholder="Enter Your Name" name="name" [class.is-valid]="FullName.valid"
+                    [class.is-invalid]="FullName.invalid && FullName.touched">
+                <div [hidden]="FullName.valid || FullName.untouched">
+                    <small *ngIf="FullName.errors?.['required']" id="helpId" class="form-text text-muted d-block">
+                        Name is
+                        Required</small>
+                    <small *ngIf="FullName.errors?.['minlength']" id="helpId112" class="form-text text-muted d-block">
+                        Name must match the pattern</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username"> <span class="glyphicon glyphicon-user"></span>User Name</label>
+                <input formControlName="userName" type="text" class="form-control" id="username"
+                   required minlength="4" placeholder="Enter Your UserName" name="username" [class.is-valid]="userName.valid"
+                    [class.is-invalid]="userName.invalid && userName.touched">
+                <div [hidden]="userName.valid || FullName.untouched">
+                    <small *ngIf="userName.errors?.['required']" id="helpId12" class="form-text text-muted d-block">User
+                        UserName is
+                        Required</small>
+                    <small *ngIf="userName.errors?.['minlength']" id="helpId11" class="form-text text-muted d-block">User
+                        UserName must be 4
+                        letters at least</small>
+                    <small *ngIf="userName.errors?.['maxlength']" id="helpId13" class="form-text text-muted d-block">User
+                            UserName must be 10
+                            letters at most</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email"> <span class="glyphicon glyphicon-user"></span> Email:</label>
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter email"
+                   required name="email">
+
+                <div [hidden]="Email.valid || Email.untouched">
+                    <small *ngIf="Email.errors?.['required']" id="helpId2" class="form-text text-muted d-block">Email is
+                        Required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address"> <span class="glyphicon glyphicon-user"></span> Address:</label>
+                <input formControlName="address" type="text" class="form-control" id="address" placeholder="Enter Your Address"
+                  required name="address">
+
+                <div [hidden]="Address.valid || Address.untouched">
+                    <small *ngIf="Address.errors?.['required']" id="helpId3" class="form-text text-muted d-block">Address is
+                        Required</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile"> <span class="glyphicon glyphicon-user"></span> Mobile Number:</label>
+                <input formControlName="phone" type="text" class="form-control" id="mobile" placeholder="Enter Your Mobile Number"
+                    name="mobile" required pattern="^(011|012|010|015)[0-9]{8}$">
+
+                <div [hidden]="Mobile.valid || Mobile.untouched">
+                    <small *ngIf="Mobile.errors?.['required']" id="helpId4" class="form-text text-muted d-block">Mobile is
+                        Required</small>
+                    <small *ngIf="Mobile.errors?.['pattern']" id="helpId4" class="form-text text-muted d-block">Mobile is
+                        not match pattern</small>
+                </div>
+            </div>
+
+        
+            <div class="mb-3">
+                <label class="form-label">Select Delivery Options!</label>
+                <div class="btn-group" role="group">
+
+                    <input type="radio" formControlName="deliveryOptions" value="AnyDay"
+                        (change)="updateSpecificDaysDeliveryValidaiton()" class="btn-check" name="deliveryOptions"
+                        id="AnyDay" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="AnyDay">Any Day</label>
+
+                    <input type="radio" formControlName="deliveryOptions" value="SpecificDays"
+                        (change)="updateSpecificDaysDeliveryValidaiton()" class="btn-check" name="deliveryOptions"
+                        id="SpecificDays" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="SpecificDays">Specific Days</label>
+
+                    <div [hidden]="DeliveryOptions.valid || DeliveryOptions.untouched">
+                        <small *ngIf="DeliveryOptions.errors?.['required']" id="helpId5"
+                            class="form-text text-muted d-block">Select Delivery Options
+                            Required</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3" [hidden]="DeliveryOptions.value!='SpecificDays'">
+                <label for="SpecificDays" class="form-label">Please specify Days:</label>
+                <input type="text" formControlName="specificDays" class="form-control" name="SpecificDays"
+                    id="SpecificDays1" placeholder="Enter Specific Days">
+                    <div [hidden]="SpecificDays.valid || SpecificDays.untouched">
+                        <small *ngIf="SpecificDays.errors?.['required']" id="helpId6"
+                            class="form-text text-muted d-block">SpecificDays is
+                            Required</small>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label for="pwd"> <span class="glyphicon glyphicon-lock"></span> Password:</label>
+                <input type="Password" formControlName="password" class="form-control" id="pwd"
+                   required pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$"
+                    placeholder="Enter password" name="pwd">
+                <div [hidden]="Password.valid || Password.untouched">
+                    <small *ngIf="Password.errors?.['required']" id="helpId7"
+                        class="form-text text-muted d-block">Password is
+                        Required</small>
+                    <small *ngIf="Password.errors?.['pattern']" id="helpId8"
+                        class="form-text text-muted d-block">Password must have at least 7 char and
+                        contain Capital Letter and Special Characters and numbers!</small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="uPassConfirm" class="form-label">Confirm Password</label>
+                <input type="password" formControlName="ConfirmPassword" class="form-control" name="uPassConfirm"
+                    id="uPassConfirm" placeholder="">
+                <div [hidden]="Password.valid || Password.untouched">
+                    <small *ngIf="Password.errors?.['required']" id="helpId9"
+                        class="form-text text-muted d-block">Password is
+                        Required</small>
+                </div>
+            </div>
+
+            <div *ngIf="RegistrationForm.errors?.['passwordMismatch'] 
+              && (ConfirmPassword.touched || Password.touched)"
+                class="cross-validation-error-message alert alert-danger">
+                Password and confirm password don't match.
+            </div>
+            <a routerLink="/Loging/Login">If You Have Account Login</a><br><br>
+            <button [disabled]="RegistrationForm.invalid" type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

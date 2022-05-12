@@ -1,0 +1,44 @@
+<h1>{{store.Name}}</h1>
+<img [src]="store.Logo" />
+<h3 *ngIf="Discount!='No Discount'">We offer an explicit discount of: {{Discount}} </h3>
+<select class="form-control" #show (change)="ShowProduct(show.value)">
+  <option value="Select Category">Select Category</option>
+  <!-- <option [value]="item.id" *ngFor="let item of store.Categories">{{item.Name}}</option> -->
+  <option [value]="item.id" *ngFor="let item of CategoryList">{{item.name}}</option>
+
+</select>
+<div class="container">
+  <!-- <table [hidden]="IsPurshased" class="table"> -->
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [hidden]="item.quantity==0" *ngFor="let item of ProductListForCategory"
+      [ngStyle]="{'background-color':item.quantity==1? 
+      'lightyellow':'white'}">
+        <td>{{item.name}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.quantity}}</td>
+        <td><img ProductCard src="{{item.img}}"/></td>
+        <td>
+          <a name="" id="" class="btn btn-dark"
+            role="button" (click)="openDetailsModal(item.id)" mat-mini-fab>Details</a>
+        </td>
+        <td>
+          <a name="" id="" class="btn btn-dark"
+            role="button" [routerLink]="['/Product/EditProduct', item.id]">Edit</a>
+        </td>
+        <td>
+          <a name="" id="" class="btn btn-danger"
+            role="button" (click)="DeleteProduct(item.id)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

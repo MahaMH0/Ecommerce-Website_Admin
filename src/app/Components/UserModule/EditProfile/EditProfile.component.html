@@ -1,0 +1,77 @@
+<div class="wrapper bg-white mt-sm-5">
+  <h4 class="pb-4 border-bottom">Account settings</h4>
+
+  <form #userform="ngForm" (ngSubmit)="UpdateUserDate()">
+    <div class="mb-3">
+      <label for="FullName" class="form-label">Name</label>
+      <input #Name="ngModel" type="text" [(ngModel)]="CurrentUser.fullName"
+        class="form-control" [class.is-valid]="UserName.valid" [class.is-invalid]="Name.invalid && Name.touched" name="FullName" id="FullName" required minlength="9">
+      <div [hidden]="Name.valid || Name.untouched">
+        <small *ngIf="Name.errors?.['required']" id="helpId" class="form-text text-muted d-block"> Name is Required</small>
+        <small *ngIf="Name.errors?.['minlength']" id="helpId2" class="form-text text-muted d-block"> Name must be 9 letters at least</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="UName" class="form-label">User Name</label>
+      <input readonly #UserName="ngModel" type="text" [(ngModel)]="CurrentUser.userName"
+        class="form-control" [class.is-valid]="UserName.valid" [class.is-invalid]="UserName.invalid && UserName.touched" name="UName" id="UName" required minlength="5">
+      <div [hidden]="UserName.valid || UserName.untouched">
+        <small *ngIf="UserName.errors?.['required']" id="helpId11" class="form-text text-muted d-block">User Name is Required</small>
+        <small *ngIf="UserName.errors?.['minlength']" id="helpId12" class="form-text text-muted d-block">User Name must be 5 letters at least</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="Password" class="form-label">Password</label>
+      <input #UPassword="ngModel" type="password" [(ngModel)]="CurrentUser.passwordHash"
+        class="form-control" [class.is-valid]="UPassword.valid" [class.is-invalid]="UPassword.invalid && UPassword.touched" name="Password" id="Password" required 
+        pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$">
+      <div [hidden]="UPassword.valid || UPassword.untouched">
+        <small *ngIf="UPassword.errors?.['required']" id="helpId21" class="form-text text-muted d-block">Password is Required</small>
+        <small *ngIf="UPassword.errors?.['pattern']" id="helpId22" class="form-text text-muted d-block">Password must match the Pattern</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="UEmail" class="form-label">Email</label>
+      <input #UserEmail="ngModel" type="email" [(ngModel)]="CurrentUser.email"
+        class="form-control" name="UEmail" id="UEmail" required >
+        <div [hidden]="UserEmail.valid || UserEmail.untouched">
+          <small *ngIf="UserEmail.errors?.['required']" id="helpId3" class="form-text text-muted d-block">Email is Required</small>
+        </div>
+    </div>
+    <div class="mb-3">
+      <label for="UPhone" class="form-label">Phone</label>
+      <input #UserPhone="ngModel" type="text" [(ngModel)]="CurrentUser.phoneNumber"
+        class="form-control" name="UPhone" id="UPhone"  required pattern="^(011|012|010|015)[0-9]{8}$">
+        <div [hidden]="UserPhone.valid || UserPhone.untouched">
+          <small *ngIf="UserPhone.errors?.['required']" id="helpId4" class="form-text text-muted d-block">Phone Number is Required</small>
+          <small *ngIf="UserPhone.errors?.['pattern']" id="helpId5" class="form-text text-muted d-block">Phone Number must match the pattern</small>
+        </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="UDeliveryOption" class="form-label">DeliveryOptions</label>
+      <input #UserDeliveryOption="ngModel" type="text" [(ngModel)]="CurrentUser.deliveryOptions"
+        class="form-control" name="UDeliveryOption" id="UDeliveryOption"  required>
+        <div [hidden]="UserDeliveryOption.valid || UserDeliveryOption.untouched">
+          <small *ngIf="UserDeliveryOption.errors?.['required']" id="helpId6" class="form-text text-muted d-block">Phone Number is Required</small>
+          <small *ngIf="UserDeliveryOption.errors?.['pattern']" id="helpId7" class="form-text text-muted d-block">Phone Number must match the pattern</small>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="UAddress" class="form-label">Address</label>
+        <input #UserAddress="ngModel" type="text" [(ngModel)]="CurrentUser.address"
+          class="form-control" name="UAddress" id="UAddress"  required minlength="4">
+          <div [hidden]="UserAddress.valid || UserAddress.untouched">
+            <small *ngIf="UserAddress.errors?.['required']" id="helpId8" class="form-text text-muted d-block">Address is Required</small>
+            <small *ngIf="UserAddress.errors?.['minlength']" id="helpId9" class="form-text text-muted d-block">Address must be 4 Letters at least</small>
+          </div>
+      </div>
+    <button [disabled]="userform.invalid" type="submit" class="btn btn-success" >Submit</button>
+  </form>
+  <br>
+  <a routerLink="/Home" routerLinkActive="active" class="nav-link">Back to Home</a>
+</div>

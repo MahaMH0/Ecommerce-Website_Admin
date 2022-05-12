@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <div class="container-fluid">
+      <a href="#" class="navbar-brand">Welcome To Nena Mart</a>
+      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse6">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse6">
+          <div class="navbar-nav">
+              <a class="nav-link" routerLink="/Home" routerLinkActive="active" >Home</a>
+              <a routerLink="/User/Profile" routerLinkActive="active" class="nav-link">Profile</a>
+
+              <a routerLink="/Product/Products" routerLinkActive="active" class="nav-link">Products</a>
+              <a routerLink="/Product/ShowOrders" routerLinkActive="active" class="nav-link">Orders</a>
+
+              <a routerLink="Product/AddProduct" routerLinkActive="active" class="nav-link">Add New Produt</a>
+              <a routerLink="Product/AddCategory" routerLinkActive="active" class="nav-link">Add New Category</a>
+
+              <a routerLink="/AboutUs" routerLinkActive="active" class="nav-link">About Us</a>
+              <a routerLink="/ContactUs" routerLinkActive="active" class="nav-link">Contact Us</a>
+            </div>
+          <form class="d-flex ms-auto">
+              <!-- <input type="text" class="form-control me-sm-2" placeholder="Search">
+              <button type="submit" class="btn btn-outline-light">Search</button> -->     
+          <div class="navbar-nav">
+            <!-- <a style="font-size: x-large;" [hidden]="IsUserLogged" routerLink="/Login" routerLinkActive="active" class="nav-link">
+            <i class="fa fa-shopping-cart"></i><span class="badge badge-danger" id="All-Bills">1</span></a> -->
+          <a [hidden]="IsUserLogged" routerLink="Loging/Login" routerLinkActive="active" class="nav-link">Login</a>
+          <a [hidden]="!IsUserLogged" routerLink="Loging/Logout" routerLinkActive="active" class="nav-link">Logout</a>
+          <a [hidden]="IsUserLogged" routerLink="Loging/Register" routerLinkActive="active" class="nav-link">Register</a>
+        
+        
+        </div>
+        </form>
+        </div>
+  </div>        
+</nav>
+ <img src="assets\mockup.jpg"/>
+<!-- <img src="assets/wecomebanner.jpg"/> -->

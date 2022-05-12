@@ -1,0 +1,46 @@
+<form #prdFrm="ngForm" (ngSubmit)="saveProduct()">
+  <div class="mb-3">
+    <label for="pName" class="form-label">Product Name</label>
+    <input #prdName="ngModel" type="text" [(ngModel)]="Product.name"
+      class="form-control" [class.is-valid]="prdName.valid" [class.is-invalid]="prdName.invalid && prdName.touched" name="pName" id="PName" placeholder="" required minlength="3">
+    <div [hidden]="prdName.valid || prdName.untouched">
+      <small *ngIf="prdName.errors?.['required']" id="helpId" class="form-text text-muted d-block">Product Name is Required</small>
+      <small *ngIf="prdName.errors?.['minlength']" id="helpId2" class="form-text text-muted d-block">Product Name must be 3 letters at least</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="pPrice" class="form-label">Product Price</label>
+    <input #prdPrice="ngModel" type="number" [(ngModel)]="Product.price"
+      class="form-control" name="pPrice" id="pPrice" required min="1">
+      <div [hidden]="prdPrice.valid || prdPrice.untouched">
+        <small *ngIf="prdPrice.errors?.['required']" id="helpId" class="form-text text-muted d-block">Product Price is Required</small>
+        <small *ngIf="prdPrice.errors?.['min']" id="helpId2" class="form-text text-muted d-block">Product Price must be 1 EGP at least</small>
+      </div>
+  </div>
+  <div class="mb-3">
+    <label for="pQuantity" class="form-label">Product Quantity</label>
+    <input #prdQuantity="ngModel" type="number" [(ngModel)]="Product.quantity"
+      class="form-control" name="pQuantity" id="pQuantity" placeholder="" required min="1">
+      <div [hidden]="prdQuantity.valid || prdQuantity.untouched">
+        <small *ngIf="prdQuantity.errors?.['required']" id="helpId1" class="form-text text-muted d-block">Product Quantity is Required</small>
+        <small *ngIf="prdQuantity.errors?.['min']" id="helpId12" class="form-text text-muted d-block">Product Quantity must be 1 amount at least</small>
+      </div>
+  </div>
+  <div class="mb-3">
+    <label for="CatSel" class="form-label">Select Category</label>
+    <select #Category="ngModel" class="form-control" [(ngModel)]="Product.cateogryID"
+      name="cat" id="CatSel" title="catgory" required>
+      <option *ngFor="let category of CategoryList" [value]="category.id">{{category.name}}</option>
+    </select>
+    <div [hidden]="Category.valid || Category.untouched">
+      <small *ngIf="Category.errors?.['required']" id="helpId3" class="form-text text-muted d-block">Product Category is Required</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="productImg" class="form-label">Product Image</label>
+    <input type="file" (change)="onFileChange($event)"
+      class="form-control" name="productImg" id="productImg" min="0" required>
+  </div>
+  <button [disabled]="prdFrm.invalid" type="submit" class="btn btn-success" >Submit</button>
+</form>
+
